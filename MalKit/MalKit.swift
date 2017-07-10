@@ -9,9 +9,9 @@
 import Foundation
 
 //MalKit API Class
-final class MalKit {
+public class MalKit {
     
-    static let sharedInstance = MalKit()
+    public static let sharedInstance = MalKit()
     
     var user_id: String = ""
     var passwd: String = ""
@@ -42,6 +42,8 @@ final class MalKit {
     }
     
     public func setUserData(user_id: String, passwd: String){
+        _ = MalKeychainService.removeValue(forKey: "user_id")
+        _ = MalKeychainService.removeValue(forKey: "passwd")
         _ = MalKeychainService.set(user_id, forKey: "user_id")
         _ = MalKeychainService.set(passwd, forKey: "passwd")
     }
