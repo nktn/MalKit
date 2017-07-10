@@ -2,17 +2,20 @@
 //  MalKit.swift
 //  MalKit
 //
-//  Created by cuberoot on 2017/07/08.
+//  Created by nktn on 2017/07/08.
 //  Copyright © 2017年 nktn. All rights reserved.
 //
 
 import Foundation
 
 //MalKit API Class
-public class MalKit {
+final class MalKit {
+    
+    static let sharedInstance = MalKit()
+    
     let user_id: String
     let passwd: String
-    let baseURLString: String
+    let baseURLString: String = "https://myanimelist.net/api/"
     var session: URLSession
     
     enum MethodType: String{
@@ -35,11 +38,15 @@ public class MalKit {
         }
     }
     
-    public init(user_id: String, passwd: String, baseURL:String = "https://myanimelist.net/api/") {
-        self.user_id = user_id
-        self.passwd = passwd
-        self.baseURLString = baseURL
+    private init() {
+        self.user_id = MalKeychainService.value(forKey: "user_id") ?? ""
+        self.passwd = MalKeychainService.value(forKey: "passwd") ?? ""
         self.session = URLSession.shared
+    }
+    
+    public func setUserData(user_id: String, passwd: String){
+        _ = MalKeychainService.set(self.user_id, forKey: "user_id")
+        _ = MalKeychainService.set(self.passwd, forKey: "passwd")
     }
     
     public func verifyCredentials(_: Any, completionHandler: @escaping (Data?, HTTPURLResponse?, NSError?) -> Void) -> URLSessionDataTask {

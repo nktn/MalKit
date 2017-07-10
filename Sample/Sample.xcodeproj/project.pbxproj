@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		903FE25C1F13C6370007B4F2 /* MalKeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903FE25B1F13C6370007B4F2 /* MalKeychainService.swift */; };
+		905023401F129D5A005A6120 /* SWXMLHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9050233F1F129D5A005A6120 /* SWXMLHash.framework */; };
 		90A21B951F12155700B3CDD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A21B941F12155700B3CDD6 /* AppDelegate.swift */; };
 		90A21B971F12155700B3CDD6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A21B961F12155700B3CDD6 /* ViewController.swift */; };
 		90A21B9A1F12155700B3CDD6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90A21B981F12155700B3CDD6 /* Main.storyboard */; };
@@ -29,6 +31,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		903FE25B1F13C6370007B4F2 /* MalKeychainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MalKeychainService.swift; sourceTree = "<group>"; };
+		9050233F1F129D5A005A6120 /* SWXMLHash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SWXMLHash.framework; path = Carthage/Build/iOS/SWXMLHash.framework; sourceTree = "<group>"; };
 		90A21B911F12155700B3CDD6 /* Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A21B941F12155700B3CDD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		90A21B961F12155700B3CDD6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -45,18 +49,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				905023401F129D5A005A6120 /* SWXMLHash.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9050233E1F129D5A005A6120 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9050233F1F129D5A005A6120 /* SWXMLHash.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		90A21B881F12155700B3CDD6 = {
 			isa = PBXGroup;
 			children = (
 				90A21BB81F12176800B3CDD6 /* MalKit */,
 				90A21B931F12155700B3CDD6 /* Sample */,
 				90A21B921F12155700B3CDD6 /* Products */,
+				9050233E1F129D5A005A6120 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,6 +100,7 @@
 			children = (
 				90A21BBA1F12176800B3CDD6 /* MalKit.h */,
 				90A21BBB1F12176800B3CDD6 /* MalKit.swift */,
+				903FE25B1F13C6370007B4F2 /* MalKeychainService.swift */,
 			);
 			name = MalKit;
 			path = ../MalKit;
@@ -167,12 +182,13 @@
 			files = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SWXMLHash.framework",
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "KEYWORDS=\"WARN:\"\nfind ${SRCROOT} \\( -name \"*.h\" -or -name \"*.m\" -or -name \"*.swift\" \\) -print0 | \\\nxargs -0 egrep --with-filename --line-number --only-matching \"($KEYWORDS).*\\$\" | \\\nperl -p -e \"s/($KEYWORDS)/ warning: \\$1/\"";
+			shellScript = "KEYWORDS=\"WARN:\"\nfind ${SRCROOT} \\( -name \"*.h\" -or -name \"*.m\" -or -name \"*.swift\" \\) -print0 | \\\nxargs -0 egrep --with-filename --line-number --only-matching \"($KEYWORDS).*\\$\" | \\\nperl -p -e \"s/($KEYWORDS)/ warning: \\$1/\"\n\n/usr/local/bin/carthage copy-frameworks";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -183,6 +199,7 @@
 			files = (
 				90A21B971F12155700B3CDD6 /* ViewController.swift in Sources */,
 				90A21BBF1F12176800B3CDD6 /* MalKit.swift in Sources */,
+				903FE25C1F13C6370007B4F2 /* MalKeychainService.swift in Sources */,
 				90A21B951F12155700B3CDD6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -307,6 +324,10 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Sample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nktn.Sample;
@@ -320,6 +341,10 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Sample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nktn.Sample;
