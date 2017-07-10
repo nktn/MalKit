@@ -13,8 +13,8 @@ final class MalKit {
     
     static let sharedInstance = MalKit()
     
-    let user_id: String
-    let passwd: String
+    var user_id: String = ""
+    var passwd: String = ""
     let baseURLString: String = "https://myanimelist.net/api/"
     var session: URLSession
     
@@ -29,7 +29,6 @@ final class MalKit {
         case deleteAnime = "animelist/delete/"
         case deleteManga = "mangalist/delete/"
     }
-   
     
     enum LocalError: Int {
         case TooManyLogin = 0
@@ -39,17 +38,15 @@ final class MalKit {
     }
     
     private init() {
-        self.user_id = MalKeychainService.value(forKey: "user_id") ?? ""
-        self.passwd = MalKeychainService.value(forKey: "passwd") ?? ""
         self.session = URLSession.shared
     }
     
     public func setUserData(user_id: String, passwd: String){
-        _ = MalKeychainService.set(self.user_id, forKey: "user_id")
-        _ = MalKeychainService.set(self.passwd, forKey: "passwd")
+        _ = MalKeychainService.set(user_id, forKey: "user_id")
+        _ = MalKeychainService.set(passwd, forKey: "passwd")
     }
     
-    public func verifyCredentials(_: Any, completionHandler: @escaping (Data?, HTTPURLResponse?, NSError?) -> Void) -> URLSessionDataTask {
+    public func verifyCredentials(completionHandler: @escaping (Data?, HTTPURLResponse?, NSError?) -> Void) -> URLSessionDataTask {
         return performGetRequest(MethodType.validatingLogin.rawValue, last_half: ".xml", params: nil, completionHandler: completionHandler)
     }
     
@@ -94,6 +91,17 @@ final class MalKit {
             return performPostRequest(MethodType.deleteManga.rawValue, last_half: id+".xml", params: nil, completionHandler: completionHandler)
     }
     
+    private func auth() -> URLSessionConfiguration{
+        let config = URLSessionConfiguration.default
+        self.user_id = MalKeychainService.value(forKey: "user_id") ?? ""
+        self.passwd = MalKeychainService.value(forKey: "passwd") ?? ""
+        let userPasswordString =  self.user_id+":"+self.passwd
+        let userPasswordData = userPasswordString.data(using: String.Encoding.utf8)
+        let base64EncodedCredential = userPasswordData!.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
+        let authString = "Basic \(base64EncodedCredential)"
+        config.httpAdditionalHeaders = ["Authorization" : authString]
+        return config
+    }
 
     //GET Only
     private func performGetRequest(_ first_half: String, last_half: String, params: [String: AnyObject]?, completionHandler: @escaping (Data?, HTTPURLResponse?, NSError?) -> Void) -> URLSessionDataTask {
@@ -114,12 +122,7 @@ final class MalKit {
             }
             i += 1
         }
-        let config = URLSessionConfiguration.default
-        let userPasswordString =  self.user_id+":"+self.passwd
-        let userPasswordData = userPasswordString.data(using: String.Encoding.utf8)
-        let base64EncodedCredential = userPasswordData!.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
-        let authString = "Basic \(base64EncodedCredential)"
-        config.httpAdditionalHeaders = ["Authorization" : authString]
+        let config = auth()
         self.session = URLSession(configuration: config)
         let dataTask = self.session.dataTask(with: URL(string: urlString)!){ data, response, error in
             
@@ -153,12 +156,7 @@ final class MalKit {
             request.httpBody = xmlData
         }
         request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-type")
-        let config = URLSessionConfiguration.default
-        let userPasswordString =  self.user_id+":"+self.passwd
-        let userPasswordData = userPasswordString.data(using: String.Encoding.utf8)
-        let base64EncodedCredential = userPasswordData!.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
-        let authString = "Basic \(base64EncodedCredential)"
-        config.httpAdditionalHeaders = ["Authorization" : authString]
+        let config = auth()
         self.session = URLSession(configuration: config)
         let dataTask = self.session.dataTask(with: request) { data, response, error in
             
