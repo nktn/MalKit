@@ -12,7 +12,6 @@ import Foundation
 public class MalKit {
     
     public static let sharedInstance = MalKit()
-    
     var user_id: String = ""
     var passwd: String = ""
     let baseURLString: String = "https://myanimelist.net/api/"
@@ -32,6 +31,7 @@ public class MalKit {
     
     enum LocalError: Int {
         case TooManyLogin = 0
+        case NoUserData = 1
         func createError(userInfo: [String : AnyObject]? = nil) -> NSError {
             return NSError(domain: "malkit", code: self.rawValue, userInfo: userInfo)
         }
@@ -42,8 +42,7 @@ public class MalKit {
     }
     
     public func setUserData(user_id: String, passwd: String){
-        _ = MalKeychainService.removeValue(forKey: "user_id")
-        _ = MalKeychainService.removeValue(forKey: "passwd")
+        _ = MalKeychainService.reset()
         _ = MalKeychainService.set(user_id, forKey: "user_id")
         _ = MalKeychainService.set(passwd, forKey: "passwd")
     }
@@ -76,7 +75,7 @@ public class MalKit {
         URLSessionDataTask {
             return performPostRequest(MethodType.deleteAnime.rawValue, last_half: id+".xml", params: nil, completionHandler: completionHandler)
     }
-
+    
     
     public func addManga(_ id: String, query: String, completionHandler: @escaping (Bool?, HTTPURLResponse?, NSError?) -> Void) ->
         URLSessionDataTask {
@@ -93,6 +92,16 @@ public class MalKit {
             return performPostRequest(MethodType.deleteManga.rawValue, last_half: id+".xml", params: nil, completionHandler: completionHandler)
     }
     
+    private func checkUser() -> Bool{
+        self.user_id = MalKeychainService.value(forKey: "user_id") ?? ""
+        self.passwd = MalKeychainService.value(forKey: "passwd") ?? ""
+        if self.user_id != "" || self.passwd != ""{
+            return false
+        }
+        return true
+    }
+    
+    
     private func auth() -> URLSessionConfiguration{
         let config = URLSessionConfiguration.default
         self.user_id = MalKeychainService.value(forKey: "user_id") ?? ""
@@ -104,11 +113,10 @@ public class MalKit {
         config.httpAdditionalHeaders = ["Authorization" : authString]
         return config
     }
-
+    
     //GET Only
     private func performGetRequest(_ first_half: String, last_half: String, params: [String: AnyObject]?, completionHandler: @escaping (Data?, HTTPURLResponse?, NSError?) -> Void) -> URLSessionDataTask {
         var params = params
-        
         var urlString = (self.baseURLString as NSString).appendingPathComponent(first_half+last_half)
         if params == nil {
             params = [:]
@@ -135,7 +143,7 @@ public class MalKit {
             
             let res = response as? HTTPURLResponse
             if res?.statusCode == 403 {
-                let errorWithUserInfo = LocalError.TooManyLogin.createError(userInfo: ["login_error" : "too many" as AnyObject])
+                let errorWithUserInfo = LocalError.TooManyLogin.createError(userInfo: ["login_error" : String(data: data!, encoding: .utf8) as AnyObject])
                 completionHandler(nil, response as? HTTPURLResponse, errorWithUserInfo as NSError)
                 return
             }
@@ -148,7 +156,6 @@ public class MalKit {
     
     //POST Only
     private func performPostRequest(_ first_half: String, last_half: String, params: String?, completionHandler: @escaping (Bool?, HTTPURLResponse?, NSError?) -> Void) -> URLSessionDataTask {
-
         let urlString = (self.baseURLString as NSString).appendingPathComponent(first_half+last_half)
         var request = URLRequest(url: URL(string: urlString)!)
         request.httpMethod = "POST"

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MalKit
 import SWXMLHash
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -15,7 +14,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var xml: XMLIndexer? = nil
     @IBOutlet weak var tableView: UITableView!
     @IBAction func add(_ sender: Any) {
-        
         _ = MalKit.sharedInstance.addAnime("20",query: "<entry><status>6</status></entry>", completionHandler: { (result, res, err) in
             if err == nil {
                 var str:String = "NG"
@@ -33,7 +31,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
         _ = MalKit.sharedInstance.searchAnime("naruto", completionHandler: { (items, res, err) in
             if err == nil {
                 if items != nil{
