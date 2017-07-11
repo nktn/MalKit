@@ -1,3 +1,8 @@
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Pod Version](http://img.shields.io/cocoapods/v/MalKit.svg?style=flat)](http://cocoadocs.org/docsets/MalKit/)
+[![Pod Platform](http://img.shields.io/cocoapods/p/MalKit.svg?style=flat)](http://cocoadocs.org/docsets/MalKit/)
+[![Pod License](http://img.shields.io/cocoapods/l/MalKit.svg?style=flat)](https://github.com/nktn/MalKit/blob/master/LICENSE)
+![Swift version](https://img.shields.io/badge/swift-3.0-orange.svg)
 # MalKit
 ====
 
@@ -17,6 +22,7 @@ import MalKit
 func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     _ = MalKit.sharedInstance.setUserData(user_id: "xxxxxx", passwd: "yyyyyy")
     return true
+    }
 ```
 *You can setup other ViewController. 
 
@@ -63,11 +69,22 @@ _ = MalKit.sharedInstance.verifyCredentials(completionHandler: { (result, res, e
 ```
 
 ## Install
-### write Podfile
+### [Carthage](https://github.com/Carthage/Carthage)
+
+#### Cartfile
+```
+github "nktn/MalKit"
+```
+`carthage update`
+
+### [CocoaPods](https://github.com/cocoapods/cocoapods)
+
+#### Podfile
 ```
 pod 'MalKit'
-pod install
 ```
+`pod install`
+
 ## Licence
 MIT
 
