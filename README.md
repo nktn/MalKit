@@ -2,14 +2,13 @@
 ====
 
 ## Description
-Swift API Client for MyAnimeList
+Swift API Client for MyAnimeList(official API)
 
 ## Requirement
-Xcode8.3.3
-Swift3
+Xcode8.3.X(Swift3)
 
 ## Usage
-### Setup
+### Setup(MyAnimeList account for request API)
 ```Swift
 
 // AppDelegate.swift
@@ -19,6 +18,8 @@ func application(application: UIApplication, didFinishLaunchingWithOptions launc
     _ = MalKit.sharedInstance.setUserData(user_id: "xxxxxx", passwd: "yyyyyy")
     return true
 ```
+*You can setup other ViewController. 
+
 ### Search Sample(anime)
 ```Swift
 
