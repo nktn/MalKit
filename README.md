@@ -52,7 +52,7 @@ _ = MalKit.sharedInstance.updateAnime("20",query: "<entry><status>4</status></en
 })
 ```
 
-### delte Sample(anime)
+### delete Sample(anime)
 ```Swift
 _ = MalKit.sharedInstance.deleteAnime("20", completionHandler: { (result, res, err) in
       //result is Bool
