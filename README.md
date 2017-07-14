@@ -16,7 +16,6 @@ Xcode8.3.X(Swift3)
 ### Setup(MyAnimeList account for request API)
 ```Swift
 
-// AppDelegate.swift
 import MalKit
 
 MalKit.sharedInstance.setUserData(user_id: "xxxxxx", passwd: "yyyyyy")
