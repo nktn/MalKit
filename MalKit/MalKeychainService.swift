@@ -18,6 +18,7 @@ private extension Bool {
 //MARK: - Public
 public class MalKeychainService {
     
+    @discardableResult
     class func set(_ value:String, forKey key:String) -> Bool {
         if valueExists(forKey: key) {
             return update(value, forKey: key)
@@ -26,6 +27,7 @@ public class MalKeychainService {
         }
     }
     
+    @discardableResult
     class func set(_ bool:Bool, forKey key:String) -> Bool {
         return set(bool.stringValue, forKey: key)
     }
@@ -35,14 +37,17 @@ public class MalKeychainService {
         return String(data: valueData, encoding: .utf8)
     }
     
+    @discardableResult
     class func bool(forKey key: String) -> Bool {
         return value(forKey: key) == true.stringValue
     }
     
+    @discardableResult
     class func removeValue(forKey key:String) -> Bool {
         return deleteValue(forKey: key)
     }
     
+    @discardableResult
     class func reset() -> Bool {
         
         let searchDictionary = basicDictionary()

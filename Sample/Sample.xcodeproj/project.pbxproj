@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		903FE25C1F13C6370007B4F2 /* MalKeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903FE25B1F13C6370007B4F2 /* MalKeychainService.swift */; };
+		9041E7311F191CF200D00019 /* MalKitMakeQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041E72E1F191CF200D00019 /* MalKitMakeQuery.swift */; };
+		9041E7321F191CF200D00019 /* MalKitDateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041E72F1F191CF200D00019 /* MalKitDateUtil.swift */; };
+		9041E7331F191CF200D00019 /* MalKitGlobalVar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041E7301F191CF200D00019 /* MalKitGlobalVar.swift */; };
 		905023401F129D5A005A6120 /* SWXMLHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9050233F1F129D5A005A6120 /* SWXMLHash.framework */; };
 		90A21B951F12155700B3CDD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A21B941F12155700B3CDD6 /* AppDelegate.swift */; };
 		90A21B971F12155700B3CDD6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A21B961F12155700B3CDD6 /* ViewController.swift */; };
@@ -32,6 +35,9 @@
 
 /* Begin PBXFileReference section */
 		903FE25B1F13C6370007B4F2 /* MalKeychainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MalKeychainService.swift; sourceTree = "<group>"; };
+		9041E72E1F191CF200D00019 /* MalKitMakeQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MalKitMakeQuery.swift; sourceTree = "<group>"; };
+		9041E72F1F191CF200D00019 /* MalKitDateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MalKitDateUtil.swift; sourceTree = "<group>"; };
+		9041E7301F191CF200D00019 /* MalKitGlobalVar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MalKitGlobalVar.swift; sourceTree = "<group>"; };
 		9050233F1F129D5A005A6120 /* SWXMLHash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SWXMLHash.framework; path = Carthage/Build/iOS/SWXMLHash.framework; sourceTree = "<group>"; };
 		90A21B911F12155700B3CDD6 /* Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A21B941F12155700B3CDD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +104,9 @@
 		90A21BB81F12176800B3CDD6 /* MalKit */ = {
 			isa = PBXGroup;
 			children = (
+				9041E72E1F191CF200D00019 /* MalKitMakeQuery.swift */,
+				9041E72F1F191CF200D00019 /* MalKitDateUtil.swift */,
+				9041E7301F191CF200D00019 /* MalKitGlobalVar.swift */,
 				90A21BBA1F12176800B3CDD6 /* MalKit.h */,
 				90A21BBB1F12176800B3CDD6 /* MalKit.swift */,
 				903FE25B1F13C6370007B4F2 /* MalKeychainService.swift */,
@@ -198,7 +207,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				90A21B971F12155700B3CDD6 /* ViewController.swift in Sources */,
+				9041E7321F191CF200D00019 /* MalKitDateUtil.swift in Sources */,
+				9041E7331F191CF200D00019 /* MalKitGlobalVar.swift in Sources */,
 				90A21BBF1F12176800B3CDD6 /* MalKit.swift in Sources */,
+				9041E7311F191CF200D00019 /* MalKitMakeQuery.swift in Sources */,
 				903FE25C1F13C6370007B4F2 /* MalKeychainService.swift in Sources */,
 				90A21B951F12155700B3CDD6 /* AppDelegate.swift in Sources */,
 			);

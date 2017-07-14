@@ -14,24 +14,35 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var xml: XMLIndexer? = nil
     @IBOutlet weak var tableView: UITableView!
     @IBAction func add(_ sender: Any) {
-        _ = MalKit.sharedInstance.addAnime("20",query: "<entry><status>6</status></entry>", completionHandler: { (result, res, err) in
+        let date = Date()
+        MalKit.sharedInstance.addAnime(20, status: 1, date_start: date, comments:"test") { (result, res, err) in
             if err == nil {
                 var str:String = "NG"
                 if result == true  {
-                 str = "OK"
+                    str = "OK"
                 }
                 let alertController = UIAlertController(title: "response",message: str, preferredStyle: UIAlertControllerStyle.alert)
                 let cancelButton = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
                 alertController.addAction(cancelButton)
-                self.present(alertController,animated: true,completion: nil)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    self.present(alertController,animated: true,completion: nil)
+                }
+            }else{
+                let str:String = "Please check user_id/passwd param or already add it"
+                let alertController = UIAlertController(title: "response",message: str, preferredStyle: UIAlertControllerStyle.alert)
+                let cancelButton = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
+                alertController.addAction(cancelButton)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    self.present(alertController,animated: true,completion: nil)
+                }
             }
-        })
+        }
     }
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        _ = MalKit.sharedInstance.searchAnime("naruto", completionHandler: { (items, res, err) in
+        MalKit.sharedInstance.searchAnime("naruto", completionHandler: { (items, res, err) in
             if err == nil {
                 if items != nil{
                     DispatchQueue.main.async(execute: {
