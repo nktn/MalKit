@@ -20,7 +20,6 @@ import MalKit
 
 MalKit.sharedInstance.setUserData(user_id: "xxxxxx", passwd: "yyyyyy")
 ```
-*You can setup other ViewController.
 
 ### Search Sample(anime)
 ```Swift
