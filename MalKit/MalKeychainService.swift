@@ -16,7 +16,7 @@ private extension Bool {
 }
 
 //MARK: - Public
-public class MalKeychainService {
+class MalKeychainService {
     
     @discardableResult
     class func set(_ value:String, forKey key:String) -> Bool {
