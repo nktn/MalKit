@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9027B6F91F1C976E0015E1C5 /* MalKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9027B6F81F1C976E0015E1C5 /* MalKitTests.swift */; };
+		9027B6FB1F1C976E0015E1C5 /* MalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A21B7B1F12146000B3CDD6 /* MalKit.framework */; };
+		9027B7011F1C98D10015E1C5 /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9027B6E01F1C7CB40015E1C5 /* OHHTTPStubs.framework */; };
 		903FE27E1F1508150007B4F2 /* MalKeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903FE27D1F1508150007B4F2 /* MalKeychainService.swift */; };
 		9041E72B1F191CC400D00019 /* MalKitMakeQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041E7281F191CC400D00019 /* MalKitMakeQuery.swift */; };
 		9041E72C1F191CC400D00019 /* MalKitDateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041E7291F191CC400D00019 /* MalKitDateUtil.swift */; };
@@ -15,7 +18,23 @@
 		90A21B871F12149300B3CDD6 /* MalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A21B861F12149300B3CDD6 /* MalKit.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		9027B6FC1F1C976E0015E1C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 90A21B721F12146000B3CDD6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 90A21B7A1F12146000B3CDD6;
+			remoteInfo = MalKit;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		9027B6DC1F1C7C960015E1C5 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
+		9027B6DE1F1C7CA60015E1C5 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
+		9027B6E01F1C7CB40015E1C5 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
+		9027B6F61F1C976E0015E1C5 /* MalKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MalKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9027B6F81F1C976E0015E1C5 /* MalKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MalKitTests.swift; sourceTree = "<group>"; };
+		9027B6FA1F1C976E0015E1C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		903FE27D1F1508150007B4F2 /* MalKeychainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MalKeychainService.swift; sourceTree = "<group>"; };
 		9041E7281F191CC400D00019 /* MalKitMakeQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MalKitMakeQuery.swift; sourceTree = "<group>"; };
 		9041E7291F191CC400D00019 /* MalKitDateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MalKitDateUtil.swift; sourceTree = "<group>"; };
@@ -27,6 +46,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9027B6F31F1C976E0015E1C5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9027B7011F1C98D10015E1C5 /* OHHTTPStubs.framework in Frameworks */,
+				9027B6FB1F1C976E0015E1C5 /* MalKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		90A21B771F12146000B3CDD6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -37,11 +65,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9027B6DB1F1C7C960015E1C5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9027B6E01F1C7CB40015E1C5 /* OHHTTPStubs.framework */,
+				9027B6DE1F1C7CA60015E1C5 /* Nimble.framework */,
+				9027B6DC1F1C7C960015E1C5 /* Quick.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9027B6F71F1C976E0015E1C5 /* MalKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				9027B6F81F1C976E0015E1C5 /* MalKitTests.swift */,
+				9027B6FA1F1C976E0015E1C5 /* Info.plist */,
+			);
+			path = MalKitTests;
+			sourceTree = "<group>";
+		};
 		90A21B711F12146000B3CDD6 = {
 			isa = PBXGroup;
 			children = (
 				90A21B7D1F12146000B3CDD6 /* MalKit */,
+				9027B6F71F1C976E0015E1C5 /* MalKitTests */,
 				90A21B7C1F12146000B3CDD6 /* Products */,
+				9027B6DB1F1C7C960015E1C5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -49,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				90A21B7B1F12146000B3CDD6 /* MalKit.framework */,
+				9027B6F61F1C976E0015E1C5 /* MalKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -81,6 +131,25 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		9027B6F51F1C976E0015E1C5 /* MalKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9027B6FE1F1C976E0015E1C5 /* Build configuration list for PBXNativeTarget "MalKitTests" */;
+			buildPhases = (
+				9027B6F21F1C976E0015E1C5 /* Sources */,
+				9027B6F31F1C976E0015E1C5 /* Frameworks */,
+				9027B6F41F1C976E0015E1C5 /* Resources */,
+				9027B7021F1C99DF0015E1C5 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9027B6FD1F1C976E0015E1C5 /* PBXTargetDependency */,
+			);
+			name = MalKitTests;
+			productName = MalKitTests;
+			productReference = 9027B6F61F1C976E0015E1C5 /* MalKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		90A21B7A1F12146000B3CDD6 /* MalKit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 90A21B831F12146000B3CDD6 /* Build configuration list for PBXNativeTarget "MalKit" */;
@@ -105,9 +174,14 @@
 		90A21B721F12146000B3CDD6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = nktn;
 				TargetAttributes = {
+					9027B6F51F1C976E0015E1C5 = {
+						CreatedOnToolsVersion = 8.3.3;
+						ProvisioningStyle = Automatic;
+					};
 					90A21B7A1F12146000B3CDD6 = {
 						CreatedOnToolsVersion = 8.3.3;
 						LastSwiftMigration = 0830;
@@ -128,11 +202,19 @@
 			projectRoot = "";
 			targets = (
 				90A21B7A1F12146000B3CDD6 /* MalKit */,
+				9027B6F51F1C976E0015E1C5 /* MalKitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		9027B6F41F1C976E0015E1C5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		90A21B791F12146000B3CDD6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -142,7 +224,32 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		9027B7021F1C99DF0015E1C5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/OHHTTPStubs.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		9027B6F21F1C976E0015E1C5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9027B6F91F1C976E0015E1C5 /* MalKitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		90A21B761F12146000B3CDD6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -157,7 +264,45 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		9027B6FD1F1C976E0015E1C5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 90A21B7A1F12146000B3CDD6 /* MalKit */;
+			targetProxy = 9027B6FC1F1C976E0015E1C5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		9027B6FF1F1C976E0015E1C5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = MalKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nktn.MalKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		9027B7001F1C976E0015E1C5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = MalKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nktn.MalKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 		90A21B811F12146000B3CDD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -301,6 +446,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9027B6FE1F1C976E0015E1C5 /* Build configuration list for PBXNativeTarget "MalKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9027B6FF1F1C976E0015E1C5 /* Debug */,
+				9027B7001F1C976E0015E1C5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		90A21B751F12146000B3CDD6 /* Build configuration list for PBXProject "MalKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

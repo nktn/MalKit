@@ -22,7 +22,7 @@ class MalKitGlobalVar{
     }
     
     enum LocalError: Int {
-        case LoginError = 0
+        case BASIC = 0
         case NoUserData = 1
         func createError(userInfo: [String : AnyObject]? = nil) -> Error {
             return NSError(domain: "malkit", code: self.rawValue, userInfo: userInfo)

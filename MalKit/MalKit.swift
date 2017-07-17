@@ -9,7 +9,6 @@
 import Foundation
 
 //MalKit API Class
-
 public class MalKit {
     
     public static let sharedInstance = MalKit()
@@ -23,11 +22,16 @@ public class MalKit {
         self.session = URLSession.shared
     }
     
-    public func setUserData(user_id: String, passwd: String){
-        MalKeychainService.reset()
-        MalKeychainService.set(user_id, forKey: "user_id")
-        MalKeychainService.set(passwd, forKey: "passwd")
-        MalKeychainService.set("0", forKey: "is_checked")
+    public func setUserData(user_id: String, passwd: String) -> Bool{
+        if user_id != "" && passwd != "" {
+            MalKeychainService.reset()
+            MalKeychainService.set(user_id, forKey: "user_id")
+            MalKeychainService.set(passwd, forKey: "passwd")
+            MalKeychainService.set("0", forKey: "is_checked")
+            return true
+        }else{
+            return false
+        }
     }
     
     public func verifyCredentials(completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) -> Void {
@@ -41,7 +45,7 @@ public class MalKit {
                     let params: [String : AnyObject] = ["q":query as AnyObject]
                     self.performGetRequest(MalKitGlobalVar.MethodType.searchAnime.rawValue, last: ".xml", params: params, completionHandler: completionHandler)
                 }else{
-                    completionHandler(nil, nil, MalKitGlobalVar.LocalError.LoginError.loginFailed())
+                    completionHandler(nil, nil, MalKitGlobalVar.LocalError.BASIC.loginFailed())
                 }
             })
     }
@@ -52,7 +56,7 @@ public class MalKit {
                     let params: [String : AnyObject] = ["q":query as AnyObject]
                     self.performGetRequest(MalKitGlobalVar.MethodType.searchManga.rawValue, last: ".xml" , params: params, completionHandler: completionHandler)
                 }else{
-                    completionHandler(nil, nil, MalKitGlobalVar.LocalError.LoginError.loginFailed())
+                    completionHandler(nil, nil, MalKitGlobalVar.LocalError.BASIC.loginFailed())
                 }
             })
     }
@@ -63,7 +67,7 @@ public class MalKit {
                 let query = MalKitMakeQuery.makeAnimeQuerty(query: [episode, status, score, storage_type, storage_value, times_rewatched, rewatch_value, date_start, date_finish, priority, enable_discussion, enable_rewatching, comments, tags], type: MalKitGlobalVar.RequestType.Add.rawValue)
                 self.performPostRequest(MalKitGlobalVar.MethodType.addAnime.rawValue, last: String(id)+".xml", params: query, completionHandler: completionHandler)
             }else{
-                completionHandler(nil, nil, MalKitGlobalVar.LocalError.LoginError.loginFailed())
+                completionHandler(nil, nil, MalKitGlobalVar.LocalError.BASIC.loginFailed())
             }
         })
     }
@@ -74,7 +78,7 @@ public class MalKit {
                     let query = MalKitMakeQuery.makeAnimeQuerty(query: [episode, status, score, storage_type, storage_value, times_rewatched, rewatch_value, date_start, date_finish, priority, enable_discussion, enable_rewatching, comments, tags], type: MalKitGlobalVar.RequestType.Update.rawValue)
                     self.performPostRequest(MalKitGlobalVar.MethodType.updateAnime.rawValue, last: String(id)+".xml", params: query, completionHandler: completionHandler)
                 }else{
-                    completionHandler(nil, nil, MalKitGlobalVar.LocalError.LoginError.loginFailed())
+                    completionHandler(nil, nil, MalKitGlobalVar.LocalError.BASIC.loginFailed())
                 }
             })
     }
@@ -85,7 +89,7 @@ public class MalKit {
                 if data {
                     self.performPostRequest(MalKitGlobalVar.MethodType.deleteAnime.rawValue, last: String(id)+".xml", params: nil, completionHandler: completionHandler)
                 }else{
-                    completionHandler(nil, nil, MalKitGlobalVar.LocalError.LoginError.loginFailed())
+                    completionHandler(nil, nil, MalKitGlobalVar.LocalError.BASIC.loginFailed())
                 }
             })
     }
@@ -97,7 +101,7 @@ public class MalKit {
                     let query = MalKitMakeQuery.makeMangaQuerty(query: [chapter, volume, status, score, times_reread, reread_value, date_start, date_finish, priority, enable_discussion, enable_rereading, comments, scan_group, tags, retail_volumes], type: MalKitGlobalVar.RequestType.Add.rawValue)
                     self.performPostRequest(MalKitGlobalVar.MethodType.addManga.rawValue, last: String(id)+".xml", params: query, completionHandler: completionHandler)
                 }else{
-                    completionHandler(nil, nil, MalKitGlobalVar.LocalError.LoginError.loginFailed())
+                    completionHandler(nil, nil, MalKitGlobalVar.LocalError.BASIC.loginFailed())
                 }
         })
     }
@@ -108,7 +112,7 @@ public class MalKit {
                     let query = MalKitMakeQuery.makeMangaQuerty(query: [chapter, volume, status, score, times_reread, reread_value, date_start, date_finish, priority, enable_discussion, enable_rereading, comments, scan_group, tags, retail_volumes], type: MalKitGlobalVar.RequestType.Update.rawValue)
                     self.performPostRequest(MalKitGlobalVar.MethodType.updateManga.rawValue, last: String(id)+".xml", params: query, completionHandler: completionHandler)
                 }else{
-                    completionHandler(nil, nil, MalKitGlobalVar.LocalError.LoginError.loginFailed())
+                    completionHandler(nil, nil, MalKitGlobalVar.LocalError.BASIC.loginFailed())
                 }
         })
     }
@@ -119,7 +123,7 @@ public class MalKit {
                 if data {
                     self.performPostRequest(MalKitGlobalVar.MethodType.deleteManga.rawValue, last: String(id)+".xml", params: nil, completionHandler: completionHandler)
                 }else{
-                    completionHandler(nil, nil, MalKitGlobalVar.LocalError.LoginError.loginFailed())
+                    completionHandler(nil, nil, MalKitGlobalVar.LocalError.BASIC.loginFailed())
                 }
             })
     }
@@ -163,8 +167,11 @@ public class MalKit {
                 return
             }
             let res = response as? HTTPURLResponse
-            if res?.statusCode != 200 {
-                let errorWithUserInfo = MalKitGlobalVar.LocalError.LoginError.createError(userInfo: ["login_error" : String(data: data!, encoding: .utf8) as AnyObject])
+            if res?.statusCode == 204 {
+                completionHandler(nil, response as? HTTPURLResponse, error)
+                return
+            }else if res?.statusCode != 200 {
+                let errorWithUserInfo = MalKitGlobalVar.LocalError.BASIC.createError(userInfo: ["error" : String(data: data!, encoding: .utf8) as AnyObject])
                 completionHandler(nil, response as? HTTPURLResponse, errorWithUserInfo as Error)
                 return
             }
