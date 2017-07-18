@@ -8,13 +8,12 @@
 
 import Foundation
 
-class MalKitDateUtil{
+class MalKitDateUtil {
     //date parameter from https://myanimelist.net/modules.php?go=api
-    class func dateString(date: Date) -> String{
+    class func dateString(date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMddyyyy"
         let dateString = formatter.string(from: date)
         return dateString
     }
-    
 }

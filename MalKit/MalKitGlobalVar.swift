@@ -8,8 +8,7 @@
 
 import Foundation
 
-class MalKitGlobalVar{
-    
+class MalKitGlobalVar {
     static let baseUrl = "https://myanimelist.net/api/"
     static let userId = "myanimelist_user_id"
     static let passwd = "myanimelist_passwd"
@@ -23,20 +22,18 @@ class MalKitGlobalVar{
     static let updateManga = "mangalist/update/"
     static let deleteAnime = "animelist/delete/"
     static let deleteManga = "mangalist/delete/"
-    
     enum LocalError: Int {
         case BASIC = 0
-        case NoUserData = 1
+        case NOUSERDATA = 1
         func createError(userInfo: [String : AnyObject]? = nil) -> Error {
             return NSError(domain: "malkit", code: self.rawValue, userInfo: userInfo)
         }
         func loginFailed() -> Error {
-            return NSError(domain: "malkit", code: self.rawValue, userInfo: ["error":"login failed"])
+            return NSError(domain: "malkit", code: self.rawValue, userInfo: ["error": "login failed"])
         }
     }
-    
     enum RequestType: Int {
-        case Add = 0
-        case Update = 1
+        case ADD = 0
+        case UPDATE = 1
     }
 }
