@@ -18,16 +18,11 @@ public class MalKit {
     var session: URLSession = URLSession.shared
     private init() {}
     //Set MyAnimeListUser_id and passwd
-    public func setUserData(userId: String, passwd: String) -> Bool {
-        if userId != "" && passwd != "" {
-            MalKitKeychainService.reset()
-            MalKitKeychainService.set(userId, forKey: MalKitGlobalVar.userId)
-            MalKitKeychainService.set(passwd, forKey: MalKitGlobalVar.passwd)
-            MalKitKeychainService.set("0", forKey: MalKitGlobalVar.isChecked)
-            return true
-        } else {
-            return false
-        }
+    public func setUserData(userId: String, passwd: String) {
+        MalKitKeychainService.reset()
+        MalKitKeychainService.set(userId, forKey: MalKitGlobalVar.userId)
+        MalKitKeychainService.set(passwd, forKey: MalKitGlobalVar.passwd)
+        MalKitKeychainService.set("0", forKey: MalKitGlobalVar.isChecked)
     }
     //Verify Credentials API
     public func verifyCredentials(completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
