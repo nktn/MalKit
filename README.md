@@ -9,6 +9,8 @@
 ## Description
 Swift API Client for MyAnimeList(official API)
 
+https://myanimelist.net/modules.php?go=api
+
 ## Requirement
 Xcode8.3.X(Swift3)
 
@@ -55,11 +57,45 @@ MalKit.sharedInstance.deleteAnime(20, completionHandler: { (result, res, err) in
 })
 ```
 
+### Search Sample(manga)
+```Swift
+
+MalKit.sharedInstance.search("naruto", completionHandler: { (items, res, err) in
+    //result is Data(XML). You need to parse XML.
+    //your process
+})
+```
+
+### add Sample(manga)
+```Swift
+
+MalKit.sharedInstance.addManga(20, status: 1, completionHandler: { (result, res, err) in
+     //result is Bool
+     //your process
+})
+```
+
+### update Sample(manga)
+```Swift
+MalKit.sharedInstance.updateManga(20, status: 2, comments:"test", completionHandler: { (result, res, err) in
+     //result is Bool
+     //your process
+})
+```
+
+### delete Sample(manga)
+```Swift
+MalKit.sharedInstance.deleteManga(20, completionHandler: { (result, res, err) in
+      //result is Bool
+     //your process
+})
+```
+
 ### Verify Credentials Sample
 ```Swift
 MalKit.sharedInstance.verifyCredentials(completionHandler: { (result, res, err) in
      //result is Data(XML). You need to parse XML.
-    //your process
+     //your process
 })
 ```
 
