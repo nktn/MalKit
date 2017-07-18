@@ -1,5 +1,5 @@
 //
-//  MalKeychainService.swift
+//  MalKitKeychainService.swift
 //  MalKit
 //
 //  Created by nktn on 2017/07/08.
@@ -16,7 +16,7 @@ private extension Bool {
 }
 
 //MARK: - Public
-class MalKeychainService {
+class MalKitKeychainService {
     
     @discardableResult
     class func set(_ value:String, forKey key:String) -> Bool {
@@ -90,7 +90,7 @@ class MalKeychainService {
 }
 
 //MARK: - fileprivate
-fileprivate extension MalKeychainService {
+fileprivate extension MalKitKeychainService {
     class func valueExists(forKey key: String) -> Bool {
         return valueData(forKey: key) != nil
     }

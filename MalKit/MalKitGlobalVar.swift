@@ -9,17 +9,20 @@
 import Foundation
 
 class MalKitGlobalVar{
-    enum MethodType: String{
-        case validatingLogin = "/account/verify_credentials"
-        case searchAnime = "anime/search"
-        case searchManga = "manga/search"
-        case addAnime = "animelist/add/"
-        case addManga = "mangalist/add/"
-        case updateAnime = "animelist/update/"
-        case updateManga = "mangalist/update/"
-        case deleteAnime = "animelist/delete/"
-        case deleteManga = "mangalist/delete/"
-    }
+    
+    static let baseUrl = "https://myanimelist.net/api/"
+    static let userId = "myanimelist_user_id"
+    static let passwd = "myanimelist_passwd"
+    static let isChecked = "is_checked"
+    static let validatingLogin = "/account/verify_credentials"
+    static let searchAnime = "anime/search"
+    static let searchManga = "manga/search"
+    static let addAnime = "animelist/add/"
+    static let addManga = "mangalist/add/"
+    static let updateAnime = "animelist/update/"
+    static let updateManga = "mangalist/update/"
+    static let deleteAnime = "animelist/delete/"
+    static let deleteManga = "mangalist/delete/"
     
     enum LocalError: Int {
         case BASIC = 0

@@ -9,7 +9,7 @@
 import Foundation
 
 class MalKitDateUtil{
-    
+    //date parameter from https://myanimelist.net/modules.php?go=api
     class func dateString(date: Date) -> String{
         let formatter = DateFormatter()
         formatter.dateFormat = "MMddyyyy"

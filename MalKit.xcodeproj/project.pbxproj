@@ -10,10 +10,10 @@
 		9027B6F91F1C976E0015E1C5 /* MalKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9027B6F81F1C976E0015E1C5 /* MalKitTests.swift */; };
 		9027B6FB1F1C976E0015E1C5 /* MalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A21B7B1F12146000B3CDD6 /* MalKit.framework */; };
 		9027B7011F1C98D10015E1C5 /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9027B6E01F1C7CB40015E1C5 /* OHHTTPStubs.framework */; };
-		903FE27E1F1508150007B4F2 /* MalKeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903FE27D1F1508150007B4F2 /* MalKeychainService.swift */; };
 		9041E72B1F191CC400D00019 /* MalKitMakeQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041E7281F191CC400D00019 /* MalKitMakeQuery.swift */; };
 		9041E72C1F191CC400D00019 /* MalKitDateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041E7291F191CC400D00019 /* MalKitDateUtil.swift */; };
 		9041E72D1F191CC400D00019 /* MalKitGlobalVar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041E72A1F191CC400D00019 /* MalKitGlobalVar.swift */; };
+		904D3B0B1F1E47A8003014EE /* MalKitKeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D3B0A1F1E47A8003014EE /* MalKitKeychainService.swift */; };
 		90A21B801F12146000B3CDD6 /* MalKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 90A21B7E1F12146000B3CDD6 /* MalKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		90A21B871F12149300B3CDD6 /* MalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A21B861F12149300B3CDD6 /* MalKit.swift */; };
 /* End PBXBuildFile section */
@@ -35,10 +35,10 @@
 		9027B6F61F1C976E0015E1C5 /* MalKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MalKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9027B6F81F1C976E0015E1C5 /* MalKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MalKitTests.swift; sourceTree = "<group>"; };
 		9027B6FA1F1C976E0015E1C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		903FE27D1F1508150007B4F2 /* MalKeychainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MalKeychainService.swift; sourceTree = "<group>"; };
 		9041E7281F191CC400D00019 /* MalKitMakeQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MalKitMakeQuery.swift; sourceTree = "<group>"; };
 		9041E7291F191CC400D00019 /* MalKitDateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MalKitDateUtil.swift; sourceTree = "<group>"; };
 		9041E72A1F191CC400D00019 /* MalKitGlobalVar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MalKitGlobalVar.swift; sourceTree = "<group>"; };
+		904D3B0A1F1E47A8003014EE /* MalKitKeychainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MalKitKeychainService.swift; sourceTree = "<group>"; };
 		90A21B7B1F12146000B3CDD6 /* MalKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MalKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A21B7E1F12146000B3CDD6 /* MalKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MalKit.h; sourceTree = "<group>"; };
 		90A21B7F1F12146000B3CDD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -106,10 +106,10 @@
 		90A21B7D1F12146000B3CDD6 /* MalKit */ = {
 			isa = PBXGroup;
 			children = (
+				904D3B0A1F1E47A8003014EE /* MalKitKeychainService.swift */,
 				9041E7281F191CC400D00019 /* MalKitMakeQuery.swift */,
 				9041E7291F191CC400D00019 /* MalKitDateUtil.swift */,
 				9041E72A1F191CC400D00019 /* MalKitGlobalVar.swift */,
-				903FE27D1F1508150007B4F2 /* MalKeychainService.swift */,
 				90A21B861F12149300B3CDD6 /* MalKit.swift */,
 				90A21B7E1F12146000B3CDD6 /* MalKit.h */,
 				90A21B7F1F12146000B3CDD6 /* Info.plist */,
@@ -255,9 +255,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9041E72D1F191CC400D00019 /* MalKitGlobalVar.swift in Sources */,
+				904D3B0B1F1E47A8003014EE /* MalKitKeychainService.swift in Sources */,
 				9041E72B1F191CC400D00019 /* MalKitMakeQuery.swift in Sources */,
 				9041E72C1F191CC400D00019 /* MalKitDateUtil.swift in Sources */,
-				903FE27E1F1508150007B4F2 /* MalKeychainService.swift in Sources */,
 				90A21B871F12149300B3CDD6 /* MalKit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -453,6 +453,7 @@
 				9027B7001F1C976E0015E1C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		90A21B751F12146000B3CDD6 /* Build configuration list for PBXProject "MalKit" */ = {
 			isa = XCConfigurationList;
