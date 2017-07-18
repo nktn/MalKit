@@ -25,8 +25,7 @@ class MalKitTests: XCTestCase {
     }
     
     func test1SetUpdata() {
-        XCTAssertFalse(m.setUserData(userId: "", passwd: ""))
-        XCTAssertTrue(m.setUserData(userId: "a", passwd: "b"))
+        m.setUserData(userId: "a", passwd: "b")
     }
     
     func test2VerifyCredentialsTrue(){
