@@ -15,7 +15,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var tableView: UITableView!
     @IBAction func add(_ sender: Any) {
         let date = Date()
-        MalKit.sharedInstance.addAnime(20, status: 1, date_start: date, comments:"test") { (result, res, err) in
+        MalKit().addAnime(20, params: ["status": 1, "date_start": date, "comments":"test"]) { (result, res, err) in
             if err == nil {
                 var str:String = "NG"
                 if result == true  {
@@ -42,7 +42,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        MalKit.sharedInstance.searchAnime("naruto", completionHandler: { (items, res, err) in
+        MalKit().searchAnime("naruto", completionHandler: { (items, res, err) in
             if err == nil {
                 if items != nil{
                     DispatchQueue.main.async(execute: {

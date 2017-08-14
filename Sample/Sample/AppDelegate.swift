@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         // WARN: "You need modify myanimelist user_id and passwd."
-        _ = MalKit.sharedInstance.setUserData(user_id: "", passwd: "")
+        MalKit().setUserData(userId: "", passwd: "")
         
         
         // Override point for customization after application launch.

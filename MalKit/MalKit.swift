@@ -8,27 +8,25 @@
 
 import Foundation
 
-//MalKit API Class
+
 public class MalKit {
-    //Singleton
-    public static let sharedInstance = MalKit()
-    var userId: String = ""
-    var passwd: String = ""
-    let baseUrlString: String = MalKitGlobalVar.baseUrl
-    var session: URLSession = URLSession.shared
-    private init() {}
-    //Set MyAnimeListUser_id and passwd
+    private var userId: String?
+    private var passwd: String?
+    private let baseUrlString: String = MalKitGlobalVar.baseUrl
+    private var session: URLSession = URLSession.shared
+    public init() {}
+    //MARK: - Set MyAnimeListUser_id and passwd
     public func setUserData(userId: String, passwd: String) {
         MalKitKeychainService.reset()
         MalKitKeychainService.set(userId, forKey: MalKitGlobalVar.userId)
         MalKitKeychainService.set(passwd, forKey: MalKitGlobalVar.passwd)
         MalKitKeychainService.set("0", forKey: MalKitGlobalVar.isChecked)
     }
-    //Verify Credentials API
+    //MARK: - Verify Credentials API
     public func verifyCredentials(completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
          self.performGetRequest(MalKitGlobalVar.validatingLogin, params: nil, completionHandler: completionHandler)
     }
-    //Anime Search
+    //MARK: - Anime Search
     public func searchAnime(_ query: String, completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
             self.checkIdPwd(completionHandler: { (data) in
                 if data {
@@ -42,7 +40,7 @@ public class MalKit {
                 }
             })
     }
-    //Manga Search
+    //MARK: - Manga Search
     public func searchManga(_ query: String, completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
             self.checkIdPwd(completionHandler: { (data) in
                 if data {
@@ -56,23 +54,22 @@ public class MalKit {
                 }
             })
     }
-    //Add Anime API
-    public func addAnime(_ animeId: Int, episode: Int? = nil, status: Int, score: Int? = nil, storage_type: Int? = nil, storage_value: Float? = nil, times_rewatched: Int? = nil, rewatch_value: Int? = nil, date_start: Date? = nil, date_finish: Date? = nil, priority: Int? = nil, enable_discussion: Int? = nil, enable_rewatching: Int? = nil, comments: String? = nil, tags: String? = nil, completionHandler: @escaping (Bool?, HTTPURLResponse?, Error?) -> Void) {
+    //MARK: - Add Anime API
+    public func addAnime(_ animeId: Int, params: Dictionary<String, Any>, completionHandler: @escaping (Bool?, HTTPURLResponse?, Error?) -> Void) {
         self.checkIdPwd(completionHandler: { (data) in
             if data {
-                let query = MalKitMakeQuery.makeAnimeQuerty(query: [episode, status, score, storage_type, storage_value, times_rewatched, rewatch_value, date_start, date_finish, priority, enable_discussion, enable_rewatching, comments, tags], type: MalKitGlobalVar.RequestType.ADD.rawValue)
+                let query = MalKitUtil().makeAnimeQuerty(params: params, type: MalKitGlobalVar.requestAdd)
                 self.performPostRequest(MalKitGlobalVar.addAnime, id: String(animeId), params: query, completionHandler: completionHandler)
             } else {
                 completionHandler(nil, nil, MalKitGlobalVar.LocalError.BASIC.loginFailed())
             }
         })
     }
-
-    //Update Anime API
-    public func updateAnime(_ animeId: Int, episode: Int? = nil, status: Int? = nil, score: Int? = nil, storage_type: Int? = nil, storage_value: Float? = nil, times_rewatched: Int? = nil, rewatch_value: Int? = nil, date_start: Date? = nil, date_finish: Date? = nil, priority: Int? = nil, enable_discussion: Int? = nil, enable_rewatching: Int? = nil, comments: String? = nil, tags: String? = nil, completionHandler: @escaping (Bool?, HTTPURLResponse?, Error?) -> Void) {
+    //MARK: - Update Anime API
+    public func updateAnime(_ animeId: Int, params: Dictionary<String, Any>, completionHandler: @escaping (Bool?, HTTPURLResponse?, Error?) -> Void) {
             self.checkIdPwd(completionHandler: { (data) in
                 if data {
-                    let query = MalKitMakeQuery.makeAnimeQuerty(query: [episode, status, score, storage_type, storage_value, times_rewatched, rewatch_value, date_start, date_finish, priority, enable_discussion, enable_rewatching, comments, tags], type: MalKitGlobalVar.RequestType.UPDATE.rawValue)
+                    let query = MalKitUtil().makeAnimeQuerty(params: params, type: MalKitGlobalVar.requestUpdate)
                     self.performPostRequest(
                         MalKitGlobalVar.updateAnime, id: String(animeId), params: query,
                         completionHandler: completionHandler
@@ -82,7 +79,7 @@ public class MalKit {
                 }
             })
     }
-    //Delete Anime API
+    //MARK: - Delete Anime API
     public func deleteAnime(_ animeId: Int, completionHandler: @escaping (Bool?, HTTPURLResponse?, Error?) -> Void) {
             self.checkIdPwd(completionHandler: { (data) in
                 if data {
@@ -96,32 +93,32 @@ public class MalKit {
             })
     }
     
-    //Add Manga
-    public func addManga(_ mangaId: Int, chapter: Int? = nil, volume: Int? = nil, status: Int, score: Int? = nil, times_reread: Int? = nil, reread_value: Int? = nil ,date_start: Date? = nil, date_finish: Date? = nil, priority: Int? = nil, enable_discussion: Int? = nil, enable_rereading: Int? = nil, comments: String? = nil, scan_group:String? = nil, tags: String? = nil, retail_volumes: Int? = nil, completionHandler: @escaping (Bool?, HTTPURLResponse?, Error?) -> Void) {
+    //MARK: - Add Manga
+    public func addManga(_ mangaId: Int, params: Dictionary<String, Any>, completionHandler: @escaping (Bool?, HTTPURLResponse?, Error?) -> Void) {
             self.checkIdPwd(completionHandler: { (data) in
                 if data {
-                    let query = MalKitMakeQuery.makeMangaQuerty(query: [chapter, volume, status, score, times_reread, reread_value, date_start, date_finish, priority, enable_discussion, enable_rereading, comments, scan_group, tags, retail_volumes], type: MalKitGlobalVar.RequestType.ADD.rawValue)
+                    let query = MalKitUtil().makeMangaQuerty(params: params, type: MalKitGlobalVar.requestAdd)
                     self.performPostRequest(MalKitGlobalVar.addManga, id: String(mangaId), params: query, completionHandler: completionHandler)
                 } else {
                     completionHandler(nil, nil, MalKitGlobalVar.LocalError.BASIC.loginFailed())
                 }
         })
     }
-    //Update Manga
-    public func updateManga(_ mangaId: Int, chapter: Int? = nil, volume: Int? = nil, status: Int?, score: Int? = nil, times_reread: Int? = nil, reread_value: Int? = nil ,date_start: Date? = nil, date_finish: Date? = nil, priority: Int? = nil, enable_discussion: Int? = nil, enable_rereading: Int? = nil, comments: String? = nil, scan_group:String? = nil, tags: String? = nil, retail_volumes: Int? = nil, completionHandler: @escaping (Bool?, HTTPURLResponse?, Error?) -> Void) {
+    //MARK: - Update Manga
+    public func updateManga(_ mangaId: Int, params: Dictionary<String, Any>, completionHandler: @escaping (Bool?, HTTPURLResponse?, Error?) -> Void) {
             self.checkIdPwd(completionHandler: { (data) in
                 if data {
-                    let query = MalKitMakeQuery.makeMangaQuerty(query: [chapter, volume, status, score, times_reread, reread_value, date_start, date_finish, priority, enable_discussion, enable_rereading, comments, scan_group, tags, retail_volumes], type: MalKitGlobalVar.RequestType.UPDATE.rawValue)
-                    self.performPostRequest(
-                        MalKitGlobalVar.updateManga, id: String(mangaId), params: query,
-                        completionHandler: completionHandler
-                    )
+                    let query = MalKitUtil().makeMangaQuerty(params: params, type: MalKitGlobalVar.requestUpdate)
+                        self.performPostRequest(
+                            MalKitGlobalVar.updateManga, id: String(mangaId), params: query,
+                            completionHandler: completionHandler
+                        )
                 } else {
                     completionHandler(nil, nil, MalKitGlobalVar.LocalError.BASIC.loginFailed())
                 }
         })
     }
-    //Delete Manga
+    //MARK: - Delete Manga
     public func deleteManga(_ mangaId: Int, completionHandler: @escaping (Bool?, HTTPURLResponse?, Error?) -> Void) {
             self.checkIdPwd(completionHandler: { (data) in
                 if data {
@@ -134,11 +131,12 @@ public class MalKit {
                 }
             })
     }
+    //MARK: - make config
     private func makeConfiguration() -> URLSessionConfiguration {
         let config = URLSessionConfiguration.default
         self.userId = MalKitKeychainService.value(forKey: MalKitGlobalVar.userId) ?? ""
         self.passwd = MalKitKeychainService.value(forKey: MalKitGlobalVar.passwd) ?? ""
-        let userPasswordString =  self.userId+":"+self.passwd
+        let userPasswordString =  self.userId!+":"+self.passwd!
         let userPasswordData = userPasswordString.data(using: String.Encoding.utf8)
         let base64EncodedCredential = userPasswordData!.base64EncodedString(
             options: Data.Base64EncodingOptions.init(rawValue: 0)
@@ -147,7 +145,7 @@ public class MalKit {
         config.httpAdditionalHeaders = ["Authorization": authString]
         return config
     }
-    //GET Only
+    //MARK: - GET Only
     @discardableResult
     private func performGetRequest(_ method_type: String, params: [String: AnyObject]?,
                                    completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) ->
@@ -191,7 +189,7 @@ public class MalKit {
         dataTask.resume()
         return dataTask
     }
-    //POST Only
+    //MARK: - POST Only
     @discardableResult
     private func performPostRequest(_ method_type: String, id: String, params: String?, completionHandler: @escaping (Bool?, HTTPURLResponse?, Error?) -> Void) -> URLSessionDataTask {
         let urlString = (self.baseUrlString as NSString).appendingPathComponent(method_type+id+".xml")
@@ -246,8 +244,8 @@ public class MalKit {
         dataTask.resume()
         return dataTask
     }
-    //UserCheck
-    private func checkIdPwd(completionHandler: @escaping (Bool) -> Void) {
+    //MARK: - UserCheck
+    public func checkIdPwd(completionHandler: @escaping (Bool) -> Void) {
         if MalKitKeychainService.value(forKey: MalKitGlobalVar.isChecked) == "0" {
             self.verifyCredentials { (data, response, error) in
                 if error != nil {

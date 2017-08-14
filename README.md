@@ -20,72 +20,82 @@ Xcode8.3.X(Swift3)
 
 import MalKit
 
-MalKit.sharedInstance.setUserData(user_id: "xxxxxx", passwd: "yyyyyy")
+MalKit().setUserData(userId: "xxxxxx", passwd: "yyyyyy")
 ```
 
-### Search Sample(anime)
+### Search Sample
 ```Swift
 
-MalKit.sharedInstance.searchAnime("naruto", completionHandler: { (items, res, err) in
+MalKit().searchAnime("naruto", completionHandler: { (items, status, err) in
     //result is Data(XML). You need to parse XML.
     //your process
 })
 ```
 
-### add Sample(anime)
 ```Swift
 
-MalKit.sharedInstance.addAnime(20, status: 2, completionHandler: { (result, res, err) in
+MalKit().searchManga("naruto", completionHandler: { (items, status, err) in
+    //result is Data(XML). You need to parse XML.
+    //your process
+})
+```
+
+## Add or Update anime/manga on your list. For additional Anime parameters, please refer [here](https://myanimelist.net/modules.php?go=api#animevalues). For Manga, please refer [here](https://myanimelist.net/modules.php?go=api#mangavalues).
+
+
+### add Sample
+```Swift
+
+MalKit().addAnime(20, params:["status": 1], completionHandler: { (result, status, err) in
+     //20 is anime_id
      //result is Bool
      //your process
 })
 ```
 
-### update Sample(anime)
 ```Swift
-MalKit.sharedInstance.updateAnime(20, status: 0, comments:"test", completionHandler: { (result, res, err) in
+
+MalKit().addManga(20, params:["status": 1], completionHandler: { (result, status, err) in
+     //20 is manga_id
      //result is Bool
      //your process
 })
 ```
 
-### delete Sample(anime)
+### update Sample
 ```Swift
-MalKit.sharedInstance.deleteAnime(20, completionHandler: { (result, res, err) in
+
+MalKit().updateAnime(20, params:["status": 0, "comments": "test"], completionHandler: { (result, status, err) in
+     //20 is anime_id
+     //result is Bool
+     //your process
+})
+```
+
+```Swift
+
+MalKit().updateManga(20, params:["status": 0, "comments": "test"], completionHandler: { (result, status, err) in
+     //20 is manga_id
+     //result is Bool
+     //your process
+})
+```
+
+
+### delete Sample
+```Swift
+
+MalKit().deleteAnime(20, completionHandler: { (result, status, err) in
+      //20 is anime_id
       //result is Bool
      //your process
 })
 ```
 
-### Search Sample(manga)
 ```Swift
 
-MalKit.sharedInstance.search("naruto", completionHandler: { (items, res, err) in
-    //result is Data(XML). You need to parse XML.
-    //your process
-})
-```
-
-### add Sample(manga)
-```Swift
-
-MalKit.sharedInstance.addManga(20, status: 1, completionHandler: { (result, res, err) in
-     //result is Bool
-     //your process
-})
-```
-
-### update Sample(manga)
-```Swift
-MalKit.sharedInstance.updateManga(20, status: 2, comments:"test", completionHandler: { (result, res, err) in
-     //result is Bool
-     //your process
-})
-```
-
-### delete Sample(manga)
-```Swift
-MalKit.sharedInstance.deleteManga(20, completionHandler: { (result, res, err) in
+MalKit().deleteManga(20, completionHandler: { (result, status, err) in
+      //20 is manga_id
       //result is Bool
      //your process
 })
@@ -93,7 +103,8 @@ MalKit.sharedInstance.deleteManga(20, completionHandler: { (result, res, err) in
 
 ### Verify Credentials Sample
 ```Swift
-MalKit.sharedInstance.verifyCredentials(completionHandler: { (result, res, err) in
+
+MalKit().verifyCredentials(completionHandler: { (result, status, err) in
      //result is Data(XML). You need to parse XML.
      //your process
 })
