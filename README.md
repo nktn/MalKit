@@ -105,6 +105,7 @@ MalKit().deleteManga(20, completionHandler: { (result, status, err) in
 ```Swift
 
 MalKit().verifyCredentials(completionHandler: { (result, status, err) in
+     //Check for MalKit().setUserData
      //result is Data(XML). You need to parse XML.
      //your process
 })
