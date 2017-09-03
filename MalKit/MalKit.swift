@@ -131,6 +131,26 @@ public class MalKit {
                 }
             })
     }
+    //MARK: - User Anime
+    public func userAnimeList(completionHandler:  @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
+        self.checkIdPwd(completionHandler: { (data) in
+            if data {
+                self.performUserRequest(MalKitGlobalVar.userAnime, completionHandler: completionHandler)
+            }else{
+                 completionHandler(nil, nil, MalKitGlobalVar.LocalError.BASIC.loginFailed())
+            }
+        })
+    }
+    //MARK: - User Manga
+    public func userMangaList(_ userName: Int, completionHandler:  @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
+        self.checkIdPwd(completionHandler: { (data) in
+            if data {
+                self.performUserRequest(MalKitGlobalVar.userManga, completionHandler: completionHandler)
+            }else{
+                completionHandler(nil, nil, MalKitGlobalVar.LocalError.BASIC.loginFailed())
+            }
+        })
+    }
     //MARK: - make config
     private func makeConfiguration() -> URLSessionConfiguration {
         let config = URLSessionConfiguration.default
@@ -244,8 +264,31 @@ public class MalKit {
         dataTask.resume()
         return dataTask
     }
+    //MARK: - User Anime/Manga
+    @discardableResult
+    private func performUserRequest(_ url: String, completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) ->
+        Void) -> URLSessionDataTask {
+        let urlString = url + self.userId!
+        self.session = URLSession()
+        let dataTask = self.session.dataTask(with: URL(string: urlString)!) { data, response, error in
+            if error != nil {
+                completionHandler(nil, response as? HTTPURLResponse, error)
+                return
+            }
+            let res = response as? HTTPURLResponse
+                if res?.statusCode != 200 {
+                let errorWithUserInfo = MalKitGlobalVar.LocalError.BASIC.createError(userInfo: ["error" : String(data: data!, encoding: .utf8) as AnyObject])
+                completionHandler(nil, response as? HTTPURLResponse, errorWithUserInfo as Error)
+                return
+            }
+            completionHandler(data, response as? HTTPURLResponse, error)
+            return
+        }
+        dataTask.resume()
+        return dataTask
+    }
     //MARK: - UserCheck
-    public func checkIdPwd(completionHandler: @escaping (Bool) -> Void) {
+    private func checkIdPwd(completionHandler: @escaping (Bool) -> Void) {
         if MalKitKeychainService.value(forKey: MalKitGlobalVar.isChecked) == "0" {
             self.verifyCredentials { (data, response, error) in
                 if error != nil {
