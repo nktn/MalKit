@@ -269,7 +269,8 @@ public class MalKit {
     private func performUserRequest(_ url: String, completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) ->
         Void) -> URLSessionDataTask {
         let urlString = url + self.userId!
-        self.session = URLSession()
+        let config = makeConfiguration()
+        self.session = URLSession(configuration: config)
         let dataTask = self.session.dataTask(with: URL(string: urlString)!) { data, response, error in
             if error != nil {
                 completionHandler(nil, response as? HTTPURLResponse, error)
