@@ -31,10 +31,6 @@ class MalKitUtil {
     //MARK: - Add and Update Anime Query
     func makeAnimeQuerty(params: Dictionary<String, Any>, type: Int) -> String? {
         let query :Array<Any?> = parseAnimeParam(params:params)
-        let query_check = query.flatMap{$0}
-        if query_check.count == 0{
-            return nil
-        }
         var str = "<entry>"
         if query[0] as? Int != nil {
             str += "<episode>"
@@ -83,15 +79,17 @@ class MalKitUtil {
             str += "<date_start>"
             str += self.dateString(date: query[7] as! Date)
             str += "</date_start>"
-        } else if query[7] != nil && query[7] as? Date == nil {
-            debugLog("date_start class is not Date / Class is " + String(describing: type(of: query[7])))
+        } else if query[7] as? String == "" {
+            str += "<date_start>"
+            str += "</date_start>"
         }
         if query[8] as? Date != nil{
             str += "<date_finish>"
             str += self.dateString(date: query[8] as! Date)
             str += "</date_finish>"
-        }  else if query[8] != nil && query[8] as? Date == nil {
-            debugLog("date_finish class is not Date / Class is " + String(describing: type(of: query[8])))
+        }  else if query[8] as? String == "" {
+            str += "<date_finish>"
+            str += "</date_finish>"
         }
 
         if query[9] as? Int != nil {
@@ -125,10 +123,10 @@ class MalKitUtil {
     //MARK: - Add and Update Manga Query
     func makeMangaQuerty(params: Dictionary<String, Any>, type: Int) -> String? {
         let query :Array<Any?> = parseMangaParam(params:params)
-        let query_check = query.flatMap{$0}
-        if query_check.count == 0{
-            return nil
-        }
+        //let query_check = query.flatMap{$0}
+        //if query_check.count == 0{
+        //    return nil
+        //}
         var str = "<entry>"
         if query[0] as? Int != nil {
             str += "<chapter>"
@@ -172,15 +170,17 @@ class MalKitUtil {
             str += "<date_start>"
             str += self.dateString(date: query[6] as! Date)
             str += "</date_start>"
-        }else if query[6] != nil && query[6] as? Date == nil{
-            debugLog("date_start class is not Date / Class is " + String(describing: type(of: query[6])))
+        }else if query[6] as? String == ""{
+            str += "<date_start>"
+            str += "</date_start>"
         }
         if query[7] as? Date != nil {
             str += "<date_finish>"
             str += self.dateString(date: query[7] as! Date)
             str += "</date_finish>"
-        }else if query[7] != nil && query[7] as? Date == nil {
-            debugLog("date_finish class is not Date / Class is " + String(describing: type(of: query[7])))
+        }else if query[7] as? String == "" {
+            str += "<date_finish>"
+            str += "</date_finish>"
         }
         if query[8] as? Int != nil {
             str += "<priority>"
@@ -223,7 +223,7 @@ class MalKitUtil {
     //MARK: - parse anime param
     private func parseAnimeParam(params: Dictionary<String, Any>) -> Array<Any?>{
         let parsedParams = [params["episode"],params["status"],params["score"],params["storage_type"],params["storage_value"],params["times_rewatched"],
-                           params["rewatch_value"],params["date_start"] as? Date,params["date_finish"],
+                           params["rewatch_value"],params["date_start"],params["date_finish"],
                            params["priority"],params["enable_discussion"],params["enable_rewatching"],
                            params["comments"],params["tags"]]
         return parsedParams
@@ -231,7 +231,7 @@ class MalKitUtil {
     //MARK: -  parse manga param
     private func parseMangaParam(params: Dictionary<String, Any>) -> Array<Any?>{
         let parsedParams = [params["chapter"],params["volume"],params["status"],params["score"],params["times_reread"],params["reread_value"],
-                           params["date_start"],params["date_finish"],params["priority"],
+                           params["date_start"], params["date_finish"],params["priority"],
                            params["enable_discussion"],params["enable_rereading"],params["comments"],
                            params["scan_group"],params["tags"],params["retail_volumes"]]
         return parsedParams
