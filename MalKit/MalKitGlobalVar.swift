@@ -24,7 +24,7 @@ class MalKitGlobalVar {
     static let deleteAnime = "/animelist/delete/"
     static let deleteManga = "/mangalist/delete/"
     static let userAnime = "https://myanimelist.net/malappinfo.php?status=all&type=anime&u="
-    static let userManga = "http://myanimelist.net/malappinfo.php?status=all&type=manga&u="
+    static let userManga = "https://myanimelist.net/malappinfo.php?status=all&type=manga&u="
     //for API Request type(add or update)
     static let requestAdd = 0
     static let requestUpdate = 1
