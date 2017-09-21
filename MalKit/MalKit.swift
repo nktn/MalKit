@@ -142,7 +142,7 @@ public class MalKit {
         })
     }
     //MARK: - User Manga
-    public func userMangaList(_ userName: Int, completionHandler:  @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
+    public func userMangaList(completionHandler:  @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
         self.checkIdPwd(completionHandler: { (data) in
             if data {
                 self.performUserRequest(MalKitGlobalVar.userManga, completionHandler: completionHandler)
