@@ -2,7 +2,7 @@
 [![Pod Version](http://img.shields.io/cocoapods/v/MalKit.svg?style=flat)](http://cocoadocs.org/docsets/MalKit/)
 [![Pod Platform](http://img.shields.io/cocoapods/p/MalKit.svg?style=flat)](http://cocoadocs.org/docsets/MalKit/)
 [![Pod License](http://img.shields.io/cocoapods/l/MalKit.svg?style=flat)](https://github.com/nktn/MalKit/blob/master/LICENSE)
-![Swift version](https://img.shields.io/badge/swift-3.0-orange.svg)
+![Swift version](https://img.shields.io/badge/swift-4.0-orange.svg)
 # MalKit
 ====
 
@@ -12,30 +12,38 @@ Swift API Client for MyAnimeList(official API)
 https://myanimelist.net/modules.php?go=api
 
 ## Requirement
-Xcode8.3.X(Swift3)
+Xcode9.0〜(Swift4)
 
 ## Usage
-### Setup(MyAnimeList account for request API)
+
+### Initialize 
 ```Swift
 
 import MalKit
+let malkit = MalKit()
+```
 
-MalKit().setUserData(userId: "xxxxxx", passwd: "yyyyyy")
+### Setup(MyAnimeList account for request API)
+```Swift
+
+malkit.setUserData(userId: "xxxxxx", passwd: "yyyyyy")
 ```
 
 ### Search Sample
 ```Swift
 
-MalKit().searchAnime("naruto", completionHandler: { (items, status, err) in
+malkit.searchAnime("naruto", completionHandler: { (items, status, err) in
     //result is Data(XML). You need to parse XML.
+    //status is HTTPURLResponse
     //your process
 })
 ```
 
 ```Swift
 
-MalKit().searchManga("naruto", completionHandler: { (items, status, err) in
+malkit.searchManga("naruto", completionHandler: { (items, status, err) in
     //result is Data(XML). You need to parse XML.
+    //status is HTTPURLResponse
     //your process
 })
 ```
@@ -46,18 +54,20 @@ MalKit().searchManga("naruto", completionHandler: { (items, status, err) in
 ### add Sample
 ```Swift
 
-MalKit().addAnime(20, params:["status": 1], completionHandler: { (result, status, err) in
+malkit.addAnime(20, params:["status": 1], completionHandler: { (result, status, err) in
      //20 is anime_id
      //result is Bool
+     //status is HTTPURLResponse
      //your process
 })
 ```
 
 ```Swift
 
-MalKit().addManga(20, params:["status": 1], completionHandler: { (result, status, err) in
+malkit.addManga(20, params:["status": 1], completionHandler: { (result, status, err) in
      //20 is manga_id
      //result is Bool
+     //status is HTTPURLResponse
      //your process
 })
 ```
@@ -65,18 +75,20 @@ MalKit().addManga(20, params:["status": 1], completionHandler: { (result, status
 ### update Sample
 ```Swift
 
-MalKit().updateAnime(20, params:["status": 0, "comments": "test"], completionHandler: { (result, status, err) in
+malkit.updateAnime(20, params:["status": 0, "comments": "test"], completionHandler: { (result, status, err) in
      //20 is anime_id
      //result is Bool
+     //status is HTTPURLResponse
      //your process
 })
 ```
 
 ```Swift
 
-MalKit().updateManga(20, params:["status": 0, "comments": "test"], completionHandler: { (result, status, err) in
+malkit.updateManga(20, params:["status": 0, "comments": "test"], completionHandler: { (result, status, err) in
      //20 is manga_id
      //result is Bool
+     //status is HTTPURLResponse
      //your process
 })
 ```
@@ -85,18 +97,20 @@ MalKit().updateManga(20, params:["status": 0, "comments": "test"], completionHan
 ### delete Sample
 ```Swift
 
-MalKit().deleteAnime(20, completionHandler: { (result, status, err) in
+malkit.deleteAnime(20, completionHandler: { (result, status, err) in
       //20 is anime_id
       //result is Bool
-     //your process
+      //status is HTTPURLResponse
+      //your process
 })
 ```
 
 ```Swift
 
-MalKit().deleteManga(20, completionHandler: { (result, status, err) in
+malkit.deleteManga(20, completionHandler: { (result, status, err) in
       //20 is manga_id
       //result is Bool
+      //status is HTTPURLResponse
      //your process
 })
 ```
@@ -104,9 +118,31 @@ MalKit().deleteManga(20, completionHandler: { (result, status, err) in
 ### Verify Credentials Sample
 ```Swift
 
-MalKit().verifyCredentials(completionHandler: { (result, status, err) in
+malkit.verifyCredentials(completionHandler: { (result, status, err) in
      //Check for MalKit().setUserData
      //result is Data(XML). You need to parse XML.
+     //status is HTTPURLResponse
+     //your process
+})
+```
+
+### Get User Anime or Manga List Data(This is not API)
+```Swift
+
+malkit.userAnimeList { (result, http_status, err) in
+     //Check for MalKit().setUserData
+     //result is Data(XML). You need to parse XML.
+     //status is HTTPURLResponse
+     //your process
+})
+```
+
+```Swift
+
+malkit.userMangaList { (result, http_status, err) in
+     //Check for MalKit().setUserData
+     //result is Data(XML). You need to parse XML.
+     //status is HTTPURLResponse
      //your process
 })
 ```
